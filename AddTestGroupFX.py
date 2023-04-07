@@ -18,6 +18,14 @@ class AddTestGroupFX(unittest.TestCase):
         self.create_group(wd, name="12345", header="54321", footer="12345")
         self.return_to_group_page(wd)
         self.logout(wd)
+    def test_add_test_emptygroup_f_x(self):
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, username="admin", password="secret")
+        self.open_groups_name(wd)
+        self.create_group(wd, name="", header="", footer="")
+        self.return_to_group_page(wd)
+        self.logout(wd)
 
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
@@ -51,6 +59,7 @@ class AddTestGroupFX(unittest.TestCase):
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys("%s" % password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
+
 
     def open_home_page(self, wd):
         wd.get("http://localhost/addressbook/")
