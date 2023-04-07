@@ -7,16 +7,15 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
-class UntitledTestCase(unittest.TestCase):
+class AddTestGroupFX(unittest.TestCase):
     def setUp(self):
-        self.wd = webdriver.Chrome(executable_path=r'')
+        self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
 
     
-    def test_untitled_test_case(self):
+    def test_add_test_group_f_x(self):
         wd = self.wd
         wd.get("http://localhost/addressbook/")
-        wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys("admin")
         wd.find_element_by_name("pass").click()
@@ -27,13 +26,13 @@ class UntitledTestCase(unittest.TestCase):
         wd.find_element_by_name("new").click()
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys("group")
+        wd.find_element_by_name("group_name").send_keys("12345")
         wd.find_element_by_name("group_header").click()
         wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys("vad")
+        wd.find_element_by_name("group_header").send_keys("54321")
         wd.find_element_by_name("group_footer").click()
         wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys("vadr")
+        wd.find_element_by_name("group_footer").send_keys("12345")
         wd.find_element_by_name("submit").click()
         wd.find_element_by_link_text("group page").click()
         wd.find_element_by_link_text("Logout").click()
@@ -47,11 +46,9 @@ class UntitledTestCase(unittest.TestCase):
         try: self.wd.switch_to_alert()
         except NoAlertPresentException as e: return False
         return True
-    
 
     def tearDown(self):
         self.wd.quit()
-
 
 if __name__ == "__main__":
     unittest.main()
