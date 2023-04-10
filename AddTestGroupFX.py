@@ -13,28 +13,26 @@ class AddTestGroupFX(unittest.TestCase):
 
     def test_add_test_group_f_x(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_groups_name(wd)
         self.create_group(wd, Group(name="12345", header="54321", footer="12345"))
-        self.return_to_group_page(wd)
         self.logout(wd)
     def test_add_test_emptygroup_f_x(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_groups_name(wd)
         self.create_group(wd,  Group(name="", header="", footer=""))
-        self.return_to_group_page(wd)
         self.logout(wd)
 
-    def logout(self, wd):
-        wd.find_element_by_link_text("Logout").click()
-
-    def return_to_group_page(self, wd):
-        wd.find_element_by_link_text("group page").click()
+    def login(self, wd, username, password):
+        self.open_home_page(wd)
+        wd.find_element_by_name("user").clear()
+        wd.find_element_by_name("user").send_keys("%s" % username)
+        wd.find_element_by_name("pass").click()
+        wd.find_element_by_name("pass").clear()
+        wd.find_element_by_name("pass").send_keys("%s" % password)
+        wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def create_group(self, wd, group):
+        self.open_groups_name(wd)
         # init group creation
         wd.find_element_by_name("new").click()
         # fill group firm
@@ -49,21 +47,19 @@ class AddTestGroupFX(unittest.TestCase):
         wd.find_element_by_name("group_footer").send_keys("%s" % group.footer)
         # submit group creation
         wd.find_element_by_name("submit").click()
+        self.return_to_group_page(wd)
+
+    def open_home_page(self, wd):
+        wd.get("http://localhost/addressbook/")
+
+    def logout(self, wd):
+        wd.find_element_by_link_text("Logout").click()
 
     def open_groups_name(self, wd):
         wd.find_element_by_link_text("groups").click()
 
-    def login(self, wd, username, password):
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("%s" % username)
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("%s" % password)
-        wd.find_element_by_xpath("//input[@value='Login']").click()
-
-
-    def open_home_page(self, wd):
-        wd.get("http://localhost/addressbook/")
+    def return_to_group_page(self, wd):
+        wd.find_element_by_link_text("group page").click()
 
     def tearDown(self):
         self.wd.quit()
