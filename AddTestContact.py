@@ -16,7 +16,7 @@ class AddTestContact(unittest.TestCase):
         self.open_add_new_contact_page(wd)
         self.create_contact(wd, Contact(firstname="Volodya", middlename="Petrovich", lastname="Volkov", nickname="Volk", tittle="Pik", company="Puki", address="gorod", homephone="9-999-99",
                             mobile="9-999-999-99-99", workphone="9-99", fax="9", email="volkov@volkov", email2="volkov2@volkov", email3="volkov3@volkov",
-                            homepage="volkov0volkov", bday="31", bmonth="December", byear="2000", aday="31", amonth="December", ayear="2010", address2="gorod2", phone2="8-888-88",
+                            homepage="volkov0volkov", bday="21", bmonth="December", byear="2000", aday="31", amonth="July", ayear="2010", address2="gorod2", phone2="8-888-88",
                             notes="pipipuk"))
         self.return_to_home_page(wd)
         self.logout(wd)
@@ -84,16 +84,15 @@ class AddTestContact(unittest.TestCase):
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys("%s" % contact.homepage)
         wd.find_element_by_name("bday").click()
-        wd.find_element_by_xpath("//option[@value='31']").click()
-        wd.find_element_by_name("bmonth").click()
-        wd.find_element_by_xpath("//option[@value='December']").click()
+        Select(wd.find_element_by_name("bday")).select_by_visible_text("%s" % contact.bday)
+        Select(wd.find_element_by_name("bmonth")).select_by_visible_text("%s" % contact.bmonth)
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys("%s" % contact.byear)
         wd.find_element_by_name("aday").click()
-        wd.find_element_by_xpath("//select[3]/option[33]").click()
+        Select(wd.find_element_by_name("aday")).select_by_visible_text("%s" % contact.aday)
         wd.find_element_by_name("amonth").click()
-        wd.find_element_by_xpath("//select[4]/option[13]").click()
+        Select(wd.find_element_by_name("amonth")).select_by_visible_text("%s" % contact.amonth)
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys("%s" % contact.ayear)
