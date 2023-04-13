@@ -1,21 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
+from fixtura.session import SessionHelper
 
 
 class Application:
     def __init__(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
+        self.session = SessionHelper(self)
 
-    def login(self, username, password):
-        wd = self.wd
-        self.open_home_page()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys("%s" % username)
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys("%s" % password)
-        wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def create_group(self, group):
         wd = self.wd
@@ -115,9 +108,6 @@ class Application:
         wd = self.wd
         wd.get("http://localhost/addressbook/")
 
-    def logout(self):
-        wd = self.wd
-        wd.find_element_by_link_text("Logout").click()
 
     def open_groups_name(self):
         wd = self.wd
