@@ -15,19 +15,19 @@ class ContactHelper:
 
     def add_first_contact_to_group(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_home_page()
         self.select_first_contact()
         # submit addition
         wd.find_element_by_name("add").click()
         # go to group page
         wd.find_element_by_xpath("//div[@id='content']/div/i/a").click()
         # return home page
-        wd.find_element_by_link_text("home").click()
+        self.open_home_page()
 
 
     def modify_first_contact(self, new_contact_data):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_home_page()
         self.select_first_contact()
         # submit edit
         wd.find_element_by_xpath("//img[@title='Edit']").click()
@@ -39,17 +39,22 @@ class ContactHelper:
 
     def delete_first_contact(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_home_page()
         self.select_first_contact()
         # submit deletion
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         # submit OK
         wd.switch_to.alert.accept()
-        wd.find_element_by_link_text("home").click()
+        self.open_home_page()
+
+    def open_home_page(self):
+        wd = self.app.wd
+        if not (wd.current_url.endswith("/index.php") and len(wd.find_elements_by_name("add")) > 0):
+            wd.find_element_by_link_text("home").click()
 
     def count(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
     def fill_contact_form(self, contact):
@@ -103,3 +108,4 @@ class ContactHelper:
     def open_add_new_contact_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
+

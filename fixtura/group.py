@@ -28,8 +28,6 @@ class GroupHelper:
         return len(wd.find_elements_by_name("selected[]"))
 
 
-
-
     def modify_first_group(self, new_group_data):
         wd = self.app.wd
         self.open_groups_page()
@@ -75,4 +73,6 @@ class GroupHelper:
 
     def open_groups_page(self):
         wd = self.app.wd
+        if wd.current_url.endswith("/group.php") and len(wd.find_elements_by_name("new")) > 0:
+            return
         wd.find_element_by_link_text("groups").click()
