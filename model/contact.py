@@ -33,12 +33,14 @@ class Contact:
         self.id = id
 
     def __repr__(self):
-        return "%s:%s:%s" % (self.id, self.lastname, self.firstname)
+        return "%s:%s:%s:%s" % (self.id, self.lastname, self.firstname, self.address)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) and \
             (self.lastname == other.lastname or self.lastname is None or other.lastname is None) and \
-            (self.firstname == other.firstname or self.firstname is None or other.firstname is None)
+            (self.firstname == other.firstname or self.firstname is None or other.firstname is None) and \
+            (self.address == other.address or self.address is None or other.address is None)
+
 
     def id_or_max(self):
         if self.id:
