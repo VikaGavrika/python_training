@@ -1,21 +1,7 @@
 # -*- coding: utf-8 -*-
 from model.group import Group
 import pytest
-import random
-import string
-
-
-def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + " "*6
-    return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
-
-testdata = [Group(name="", header="", footer="")] + [
-    Group(name=random_string("name", 10), header=random_string("header", 20), footer=random_string("footer", 20))
-    for i in range(2)]
-
-#testdata = [
-    #Group(name="", header="", footer=""),
-    #Group(name="111", header="222", footer="333")]
+from data.add_group import constant as testdata
 
 @pytest.mark.parametrize("group", testdata, ids=[repr(x) for x in testdata])
 def test_add_group_f_f(app, group):
