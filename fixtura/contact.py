@@ -186,6 +186,28 @@ class ContactHelper:
                        mobile=mobile, phone2=phone2)
 
 
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_contact_by_id(id)
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        # submit OK
+        wd.switch_to.alert.accept()
+        self.open_home_page()
+        self.contact_cache = None
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
+
+
+
+
+
+
+
 
 
 
