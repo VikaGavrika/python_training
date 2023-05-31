@@ -5,7 +5,7 @@ import random
 
 def test_delete_some_group(app, db, check_ui):
     if len(db.get_group_list()) == 0:
-        app.group.create(Group(name="test"))
+        app.group.create(Group(name="test", header="test2", footer="test3"))
     old_groups = db.get_group_list()
     #поиск нужной группы и удаление ее по идентификатору
     group = random.choice(old_groups)
