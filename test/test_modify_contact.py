@@ -4,6 +4,7 @@ from model.contact import Contact
 import random
 from random import randrange
 
+
 def test_modify_some_contact(app, db, check_ui):
     if len(db.get_contact_list()) == 0:
         app.contact.create(Contact(lastname="test1", firstname="test2", address="test3"))

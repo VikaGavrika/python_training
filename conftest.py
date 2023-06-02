@@ -4,8 +4,8 @@ import json
 from fixtura.application import Application
 import os.path
 import importlib
-import jsonpickle
 from fixtura.db import DbFixture
+import jsonpickle
 
 fixture = None
 target = None

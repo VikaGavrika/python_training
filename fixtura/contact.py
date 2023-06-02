@@ -206,7 +206,7 @@ class ContactHelper:
         self.open_home_page()
         self.select_contact_by_id(id)
         # submit edit
-        wd.find_element_by_xpath("//img[@title='Edit']").click()
+        wd.find_element_by_xpath('//a[@href="edit.php?id=%s"]' % id).click()
         # fill group form
         self.fill_contact_form(new_contact_data)
         # submit update
@@ -214,7 +214,18 @@ class ContactHelper:
         self.return_to_home_page()
         self.contact_cache = None
 
+    def add_contact_by_id_to_group(self, contact, group):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_contact_by_id(contact.id)
+        self. select_group_from_list(group)
+        self.return_to_home_page()
+        self.contact_cache = None
 
+    def select_group_from_list(self, group):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//select[@name='to_group']/option[@value='%s']" % group.id).click()
+        wd.find_element_by_name('add').click()
 
 
 
