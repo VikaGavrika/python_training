@@ -22,13 +22,20 @@ class ORMFixture:
         lastname = Optional(str, column="lastname")
         firstname = Optional(str, column="firstname")
         address = Optional(str, column="address")
+        homephone = Optional(str, column="home")
+        mobile = Optional(str, column="mobile")
+        workphone = Optional(str, column="work")
+        phone2 = Optional(str, column="phone2")
+        email = Optional(str, column="email")
+        email2 = Optional(str, column="email2")
+        email3 = Optional(str, column="email3")
         deprecated = Optional(datetime, column="deprecated")
         groups = Set(lambda: ORMFixture.ORMGroup, table="address_in_groups", column="group_id", reverse="contacts",
                        lazy=True)
 
     #описываем привязку к БД
     def __init__(self, host, name, user, password):
-        self.db.bind("mysql", host=host, database=name, user=user, password=password, conv=decoders)
+        self.db.bind("mysql", host=host, database=name, user=user, password=password)
         self.db.generate_mapping()
         sql_debug(True)
 
@@ -46,7 +53,9 @@ class ORMFixture:
 
     def convert_contacts_to_model(self, contacts):
         def convert(contact):
-            return Contact(id=str(contact.id), lastname=contact.lastname, firstname=contact.firstname, address=contact.address)
+            return Contact(id=str(contact.id), lastname=contact.lastname, firstname=contact.firstname, address=contact.address,
+                           homephone=contact.homephone, mobile=contact.mobile, workphone=contact.workphone, phone2=contact.phone2,
+                           email=contact.email, email2=contact.email2, email3=contact.email3)
         return list(map(convert, contacts))
 
     #либо можно пометить целую функцию
