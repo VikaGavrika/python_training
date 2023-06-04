@@ -219,17 +219,23 @@ class ContactHelper:
         self.open_home_page()
         self.select_contact_by_id(contact.id)
         self. select_group_from_list(group)
-        self.return_to_home_page()
-        self.contact_cache = None
+        self.open_group_page_with_group()
+
+        #self.come_back_to_home_page()
+        #self.contact_cache = None
 
     def select_group_from_list(self, group):
         wd = self.app.wd
         wd.find_element_by_xpath("//select[@name='to_group']/option[@value='%s']" % group.id).click()
         wd.find_element_by_name('add').click()
 
+    def come_back_to_home_page(self):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("[title='Addressbook']").click()
 
-
-
+    def open_group_page_with_group(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home page").click()
 
 
 
