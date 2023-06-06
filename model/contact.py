@@ -33,7 +33,7 @@ class Contact:
         self.id = id
 
     def __repr__(self):
-        return "%s:%s:%s:%s" % \
+        return "%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s" % \
             (self.id, self.lastname, self.firstname, self.address,
              self.homephone, self.mobile, self.workphone, self.phone2, self.email, self.email2, self.email3)
 

@@ -217,16 +217,14 @@ class ContactHelper:
     def add_contact_by_id_to_group(self, contact, group):
         wd = self.app.wd
         self.open_home_page()
-        self.select_contact_by_id(contact.id)
+        self.select_contact_by_id(contact)
         self. select_group_from_list(group)
-        self.open_group_page_with_group()
+        self.come_back_to_home_page()
 
-        #self.come_back_to_home_page()
-        #self.contact_cache = None
 
-    def select_group_from_list(self, group):
+    def select_group_from_list(self, id):
         wd = self.app.wd
-        wd.find_element_by_xpath("//select[@name='to_group']/option[@value='%s']" % group.id).click()
+        wd.find_element_by_xpath("//select[@name='to_group']/option[@value='%s']" % id).click()
         wd.find_element_by_name('add').click()
 
     def come_back_to_home_page(self):
@@ -237,6 +235,18 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
 
+    def delete_contact_by_id_from_group(self, group, contact):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_group_from_list_group(group)
+        self.select_contact_by_id(contact)
+        wd.find_element_by_name("remove").click()
+        self.come_back_to_home_page()
+        self.contact_cache = None
+
+    def select_group_from_list_group(self, id):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//select[@name='group']/option[@value='%s']" % id).click()
 
 
 
