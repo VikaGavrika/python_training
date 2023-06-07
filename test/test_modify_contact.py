@@ -11,10 +11,12 @@ def test_modify_some_contact(app, db, check_ui):
     old_contacts = db.get_contact_list()
     new_contact_data = Contact(lastname="NewNew1", firstname="NewNew2", address="NewNew3")
     contact = random.choice(old_contacts)
+    index = old_contacts.index(contact)
     app.contact.modify_contact_by_id(contact.id, new_contact_data)
     new_contacts = db.get_contact_list()
+    old_contacts[index] = new_contact_data
     assert len(old_contacts) == len(new_contacts)
-    assert old_contacts != new_contacts
+    assert old_contacts == new_contacts
     if check_ui:
         assert sorted(new_contacts, key=Contact.id_or_max) == sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
 
