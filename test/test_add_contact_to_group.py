@@ -20,13 +20,19 @@ def test_add_contact_to_group(app):
     contacts_in_groups = orm.get_contacts_in_group(group)
     #список контактов, которые еще не состоят в группе
     contacts_without_group = orm.get_contacts_without_group(group)
+    #если есть такой контакт
+    if len(orm.get_contacts_without_group(group)) != 0:
+        # случайный контакт из списка контактов, которые не в группе
+        contact = random.choice(contacts_without_group)
+        # добавляем контакт в группу
+        app.contact.add_contact_by_id_to_group(contact.id, group.id)
     #если нет такого контакта, то создаем его
-    if len(orm.get_contacts_without_group(group)) == 0:
+    else:
         app.contact.create(Contact(lastname="1", firstname="2", address="3"))
-    # случайный контакт из списка контактов, которые не в группе
-    contact = random.choice(contacts_without_group)
-    # добавляем контакт в группу
-    app.contact.add_contact_by_id_to_group(contact.id, group.id)
+        contacts_without_group2 = orm.get_contacts_without_group(group)
+        contact = random.choice(contacts_without_group2)
+        # добавляем контакт в группу
+        app.contact.add_contact_by_id_to_group(contact.id, group.id)
     assert len(contacts_in_groups) + 1 == len(orm.get_contacts_in_group(group))
     assert orm.contact_in_group(group, contact) is True
 
