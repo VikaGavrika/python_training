@@ -4,7 +4,8 @@ import string
 
 testdata = [
     Contact(lastname="", firstname="", address=""),
-    Contact(lastname="lastname1", firstname="firstname1", address="address1")
+    Contact(lastname="lastname1", firstname="firstname1", address="address1", homephone="11111", mobile="2222", workphone="3333", phone2="444",
+            email="nnnn", email2="mmmm", email3="gggg")
 ]
 #constant = [
     #Contact(lastname="", firstname="", address=""),
