@@ -7,3 +7,4 @@ pony
 pymysql
 mysql-connector-python-rf
 xml-python
+pytest-allure-adaptor==1.7.10
