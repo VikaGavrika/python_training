@@ -7,3 +7,4 @@ pony
 pymysql
 mysql-connector-python-rf
 xml-python
+allure-pytest
