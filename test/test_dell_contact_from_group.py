@@ -14,11 +14,11 @@ def test_dell_contact_from_group(app):
         app.group.create(Group(name="test", header="test2", footer="test3"))
     # список контактов не состоящих в группе - для проверки
     contacts_list_not_in_groups = orm.get_contacts_list_NOT_in_groups()
+    # если нет группы c контактами, то создаем ее
+    if len(orm.get_groups_with_contacts()) == 0:
+        app.contact.add_first_contact_to_group()
     # список групп, в которых есть контакты
     groups = orm.get_groups_with_contacts()
-    # если нет такой группы, то создаем ее
-    if len(orm.get_groups_with_contacts()) == 0:
-        app.contact.add_contact_to_group()
     # рандомная группа из списка групп с контактами
     group = random.choice(groups)
     # список контактов в группе
