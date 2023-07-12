@@ -7,3 +7,4 @@ pony
 pymysql
 mysql-connector-python-rf
 allure_pytest
+pony==0.7.16
