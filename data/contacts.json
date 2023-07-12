@@ -91,7 +91,7 @@
   },
   {
     "py/object": "model.contact.Contact",
-    "firstname": "firstname_3,
+    "firstname": "firstname_3",
     "middlename": null,
     "lastname": "lastname_3",
     "nickname": null,
